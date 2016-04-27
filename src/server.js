@@ -6,6 +6,7 @@ const passport = require('passport');
 
 const registerRouter = require('./endpoints/register');
 const authenticateRouter = require('./endpoints/authenticate');
+const usersRouter = require('./endpoints/users');
 
 const mongoConfig = require('./config/mongo').mongoConfig;
 
@@ -24,5 +25,6 @@ app.use(bodyParser.json());
 
 app.use('/api/register', registerRouter);
 app.use('/api/authenticate', authenticateRouter);
+app.use('/api/users', usersRouter);
 
 module.exports.server = app;
