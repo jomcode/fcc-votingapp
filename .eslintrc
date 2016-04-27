@@ -18,6 +18,7 @@
     "no-param-reassign": [1],
     "new-cap": [0],
     "vars-on-top": [0],
-    "global-require": [0]
+    "global-require": [0],
+    "no-underscore-dangle": [0]
   }
 }
