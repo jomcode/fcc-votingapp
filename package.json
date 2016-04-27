@@ -24,7 +24,9 @@
     "express-jwt": "^3.3.0",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.13",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.0.0"
   },
   "engines": {
     "node": "4.4.3"
