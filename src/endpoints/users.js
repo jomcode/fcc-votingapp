@@ -1,11 +1,11 @@
 const express = require('express');
 
-const isAuthenticated = require('../middleware/isauthenticated').isAuthenticated;
+const isAuthenticated = require('../middleware/isauthenticated');
 
 const router = express.Router();
 
 router.get('/', isAuthenticated, (req, res) => {
-  res.json({});
+  res.json({ user: req.user });
 });
 
 module.exports = router;
