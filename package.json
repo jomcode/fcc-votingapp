@@ -1,0 +1,35 @@
+{
+  "name": "votingapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jomcode/fcc-votingapp.git"
+  },
+  "keywords": [],
+  "author": "John <jomcode@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jomcode/fcc-votingapp/issues"
+  },
+  "homepage": "https://github.com/jomcode/fcc-votingapp#readme",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "express-jwt": "^3.3.0",
+    "jsonwebtoken": "^5.7.0",
+    "morgan": "^1.7.0"
+  },
+  "engines": {
+    "node": "4.4.3"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0",
+    "nodemon": "^1.9.1"
+  }
+}
