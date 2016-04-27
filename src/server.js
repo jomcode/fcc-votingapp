@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 
 const mongoConfig = require('./config/mongo').mongoConfig;
 
-mongoose.connect(mongoConfig.url, err => console.error(`${err.name}: ${err.message}`));
+mongoose.connect(mongoConfig.url, err => {
+  if (err) console.error(`${err.name}: ${err.message}`);
+});
 
 const app = express();
 
