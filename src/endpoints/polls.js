@@ -27,12 +27,12 @@ router.get('/:pollId', (req, res) => {
 router.post('/', isAuthenticated, (req, res) => {
   const newPoll = new Poll();
   newPoll.ownerId = req.user._id;
-  newPoll.name = req.body.name;
-  newPoll.description = req.body.description || '';
+  newPoll.title = req.body.title;
+  newPoll.subtitle = req.body.subtitle;
   newPoll.choices = req.body.choices.slice(0);
 
   newPoll.save((err, poll) => {
-    if (err) return res.status(400).json({ error: 'Error saving poll' });
+    if (err) return res.status(400).json({ error: err.message });
     return res.status(201).json(Object.assign({}, { poll }));
   });
 });
