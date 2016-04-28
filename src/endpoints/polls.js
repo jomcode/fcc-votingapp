@@ -6,7 +6,12 @@ const Poll = require('../models/poll');
 const router = express.Router();
 
 // get all polls
-router.get('/', (req, res) => {});
+router.get('/', (req, res) => {
+  Poll.find({}, (err, polls) => {
+    if (err) return res.status(400).json({ error: 'Error getting polls' });
+    return res.status(200).json(Object.assign({}, { polls }));
+  });
+});
 
 // get specific poll
 router.get('/:pollId', (req, res) => {});
