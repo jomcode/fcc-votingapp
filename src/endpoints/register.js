@@ -1,22 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../models/user');
+const UserRepository = require('../storage/userrepository');
+const generateHash = require('../helpers/hash').generateHash;
+
+const storage = new UserRepository();
 
 // register new user
 router.post('/', (req, res) => {
-  const newUser = new User();
-  newUser.username = req.body.username;
-  newUser.password = newUser.generateHash(req.body.password);
-
-  newUser.save((err, user) => {
-    if (err) return res.status(400).json({ error: 'Duplicate username' });
-    return res.status(201).json(Object.assign({}, {
-      user: {
-        username: user.username
-      }
-    }));
+  const newUser = Object.assign({}, req.body.user, {
+    password: generateHash(req.body.user.password)
   });
+
+  storage.create(newUser)
+    .then(user => res.status(201).json({ user: { username: user.username } }))
+    .catch(() => res.status(400).json({ error: 'Registration error' }));
 });
 
 module.exports = router;

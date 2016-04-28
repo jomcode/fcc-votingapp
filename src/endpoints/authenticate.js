@@ -2,21 +2,25 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-const User = require('../models/user');
+const UserRepository = require('../storage/userrepository');
+const isValidPassword = require('../helpers/hash').isValidPassword;
 const tokenSecret = require('../config/tokensecret').tokenSecret;
 
-const errMsg = { error: 'Authentication error' };
+const errMsg = 'Authentication error';
+const storage = new UserRepository();
 
 router.post('/', (req, res) => {
-  User.findOne({ username: req.body.username }, (err, user) => {
-    if (err) return res.json({ error: err });
-    if (!user) return res.status(401).json(errMsg);
-    if (!user.validPassword(req.body.password)) return res.status(401).json(errMsg);
+  const pw = req.body.password;
 
-    const tu = Object.assign({}, { username: user.username, _id: user._id });
-    const token = jwt.sign(tu, tokenSecret, { expiresIn: 10800 });
-    return res.status(200).json({ token: `JWT ${token}` });
-  });
+  storage.getByUsername(req.body.username)
+    .then(user => {
+      if (!user || !isValidPassword(pw, user.password)) throw new Error(errMsg);
+
+      const contents = Object.assign({}, { username: user.username, _id: user._id });
+      const token = jwt.sign(contents, tokenSecret, { expiresIn: 10800 });
+      res.status(200).json({ token: `JWT ${token}` });
+    })
+    .catch(err => res.status(400).json({ error: err.message }));
 });
 
 module.exports = router;
