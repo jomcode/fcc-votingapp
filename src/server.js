@@ -4,7 +4,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const passport = require('passport');
 
-const registerRouter = require('./endpoints/register');
+const userStorage = require('./storage/userrepository')();
+
+const registerHandlers = require('./handlers/register');
+const registerRouter = require('./endpoints/register')(userStorage, registerHandlers);
+
 const authenticateRouter = require('./endpoints/authenticate');
 const pollsRouter = require('./endpoints/polls');
 

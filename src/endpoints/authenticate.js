@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const UserRepository = require('../storage/userrepository');
-const isValidPassword = require('../helpers/hash').isValidPassword;
+const isValidPassword = require('../utilities/hash').isValidPassword;
 const tokenSecret = require('../config/tokensecret').tokenSecret;
 
 const errMsg = 'Authentication error';
-const storage = new UserRepository();
+const storage = UserRepository();
 
 router.post('/', (req, res) => {
   const pw = req.body.password;

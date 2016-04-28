@@ -13,4 +13,4 @@ UserRepository.prototype.create = function create(user) {
   return newUser.save();
 };
 
-module.exports = UserRepository;
+module.exports = () => new UserRepository();
