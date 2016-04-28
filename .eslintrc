@@ -19,6 +19,7 @@
     "new-cap": [0],
     "vars-on-top": [0],
     "global-require": [0],
-    "no-underscore-dangle": [0]
+    "no-underscore-dangle": [0],
+    "no-confusing-arrow": [0]
   }
 }

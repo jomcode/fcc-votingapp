@@ -1,100 +1,51 @@
 const express = require('express');
 
-const jsonError = require('../helpers/jsonerror').jsonError;
 const isAuthenticated = require('../middleware/isauthenticated');
-const Poll = require('../models/poll');
+const PollRepository = require('../storage/pollrepository');
 
 const router = express.Router();
+const storage = new PollRepository();
 
 // get all polls
-router.get('/', (req, res) => {
-  Poll.find({}, (err, polls) => {
-    if (err) return res.status(400).json({ error: 'Error getting polls' });
-    return res.status(200).json(Object.assign({}, { polls }));
-  });
-});
+router.get('/', (req, res) => storage
+  .getAll()
+    .then(polls => res.status(200).json({ polls }))
+    .catch(err => res.status(400).json({ error: err })));
 
 // get specific poll
-router.get('/:pollId', (req, res) => {
-  const pollId = req.params.pollId;
-
-  Poll.findById(pollId, (err, poll) => {
-    if (err) return res.json(400).json({ error: 'Error getting poll' });
-    return res.status(200).json(Object.assign({}, { poll }));
-  });
-});
+router.get('/:pollId', (req, res) => storage
+  .getById(req.params.pollId)
+    .then(poll => res.status(200).json({ poll }))
+    .catch(err => res.status(400).json({ error: err })));
 
 // create poll
-router.post('/', isAuthenticated, (req, res) => {
-  const newPoll = new Poll();
-  newPoll.ownerId = req.user._id;
-  newPoll.title = req.body.title;
-  newPoll.subtitle = req.body.subtitle;
-  newPoll.choices = req.body.choices.slice(0);
-
-  newPoll.save((err, poll) => {
-    if (err) return res.status(400).json({ error: err.message });
-    return res.status(201).json(Object.assign({}, { poll }));
-  });
-});
+router.post('/', isAuthenticated, (req, res) => storage
+  .create(req.body.poll)
+    .then(poll => res.status(201).json({ poll }))
+    .catch(err => res.status(400).json({ error: err })));
 
 // get all polls by user
-router.get('/user/:userId', isAuthenticated, (req, res) => {
-  const userId = req.params.userId;
-
-  Poll.find({ ownerId: userId }, (err, polls) => {
-    if (err) return res.json(400).json({ error: 'Error getting user polls' });
-    return res.status(200).json(Object.assign({}, { polls }));
-  });
-});
+router.get('/user/:userId', isAuthenticated, (req, res) => storage
+  .getByUserId(req.params.userId)
+    .then(polls => res.status(200).json({ polls }))
+    .catch(err => res.status(400).json({ error: err })));
 
 // delete a poll
-router.delete('/:pollId', isAuthenticated, (req, res) => {
-  const pollId = req.params.pollId;
-
-  Poll.findByIdAndRemove(pollId, (err, result) => {
-    if (err) return res.status(400).json({ error: 'Error deleting poll' });
-    if (result === null) return res.status(404).json({ error: 'Poll not found' });
-    return res.status(204).json();
-  });
-});
+router.delete('/:pollId', isAuthenticated, (req, res) => storage
+  .deleteByPollId(req.params.pollId)
+    .then(() => res.status(204).json())
+    .catch(err => res.status(400).json({ error: err })));
 
 // vote in a poll
-router.put('/vote/:choiceId', (req, res) => {
-  const choiceId = req.params.choiceId;
-
-  /* eslint-disable consistent-return */
-  Poll.findOne({ 'choices._id': choiceId }, (err, poll) => {
-    if (err) return res.status(400).json({ error: err });
-
-    const originalChoice = poll.choices.id(choiceId);
-    originalChoice.votes = originalChoice.votes + 1;
-
-    poll.save((e, updatedPoll) => {
-      if (e) return res.status(400).json({ error: e });
-      return res.status(201).json(updatedPoll);
-    });
-  });
-  /* eslint-enable consistent-return */
-});
+router.put('/vote/:choiceId', (req, res) => storage
+  .voteByChoiceId(req.params.choiceId)
+    .then(updatedPoll => res.status(201).json({ updatedPoll }))
+    .catch(err => res.status(400).json({ error: err })));
 
 // add new choice to a poll
-router.put('/addchoice/:pollId', (req, res) => {
-  const pollId = req.params.pollId;
-  const newChoice = req.body.newChoice;
-
-  /* eslint-disable consistent-return */
-  Poll.findById(pollId, (err, poll) => {
-    if (err) return res.status(400).json({ error: err });
-
-    poll.choices.push(newChoice);
-
-    poll.save((e, updatedPoll) => {
-      if (e) return jsonError(400, e, res);
-      return res.status(201).json(updatedPoll);
-    });
-  });
-  /* eslint-enable consistent-return */
-});
+router.put('/addchoice/:pollId', (req, res) => storage
+  .addChoice(req.params.pollId, req.body.newChoice)
+    .then(updatedPoll => res.status(201).json({ updatedPoll }))
+    .catch(err => res.status(400).json({ error: err })));
 
 module.exports = router;
