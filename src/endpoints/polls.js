@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const isAuthenticated = require('../middleware/isauthenticated');
 const Poll = require('../models/poll');
@@ -59,7 +60,24 @@ router.delete('/:pollId', isAuthenticated, (req, res) => {
 });
 
 // vote in a poll
-router.put('/vote/:pollId', (req, res) => {});
+router.put('/vote/:pollId/:choiceId', (req, res) => {
+  const pollId = req.params.pollId;
+  const choiceId = req.params.choiceId;
+
+  /* eslint-disable consistent-return */
+  Poll.findOne({ 'choices._id': choiceId }, (err, poll) => {
+    if (err) return res.status(400).json({ error: err });
+
+    const originalChoice = poll.choices.id(choiceId);
+    originalChoice.votes = originalChoice.votes + 1;
+
+    poll.save((e, updatedPoll) => {
+      if (e) return res.status(400).json({ error: err });
+      return res.status(201).json(updatedPoll);
+    });
+  });
+  /* eslint-enable consistent-return */
+});
 
 // add new choice to a poll
 router.put('/edit/:pollId', (req, res) => {});
