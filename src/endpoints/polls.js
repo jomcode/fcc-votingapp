@@ -60,8 +60,7 @@ router.delete('/:pollId', isAuthenticated, (req, res) => {
 });
 
 // vote in a poll
-router.put('/vote/:pollId/:choiceId', (req, res) => {
-  const pollId = req.params.pollId;
+router.put('/vote/:choiceId', (req, res) => {
   const choiceId = req.params.choiceId;
 
   /* eslint-disable consistent-return */
