@@ -38,7 +38,14 @@ router.post('/', isAuthenticated, (req, res) => {
 });
 
 // get all polls by user
-router.get('/user/:userId', isAuthenticated, (req, res) => {});
+router.get('/user/:userId', isAuthenticated, (req, res) => {
+  const userId = req.params.userId;
+
+  Poll.find({ ownerId: userId }, (err, polls) => {
+    if (err) return res.json(400).json({ error: 'Error getting user polls' });
+    return res.status(200).json(Object.assign({}, { polls }));
+  });
+});
 
 // delete a poll
 router.delete('/:pollId', isAuthenticated, (req, res) => {});
