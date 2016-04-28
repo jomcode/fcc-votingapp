@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const jsonError = require('../helpers/jsonerror').jsonError;
 const isAuthenticated = require('../middleware/isauthenticated');
 const Poll = require('../models/poll');
 
@@ -71,7 +72,7 @@ router.put('/vote/:choiceId', (req, res) => {
     originalChoice.votes = originalChoice.votes + 1;
 
     poll.save((e, updatedPoll) => {
-      if (e) return res.status(400).json({ error: err });
+      if (e) return res.status(400).json({ error: e });
       return res.status(201).json(updatedPoll);
     });
   });
@@ -79,6 +80,22 @@ router.put('/vote/:choiceId', (req, res) => {
 });
 
 // add new choice to a poll
-router.put('/edit/:pollId', (req, res) => {});
+router.put('/addchoice/:pollId', (req, res) => {
+  const pollId = req.params.pollId;
+  const newChoice = req.body.newChoice;
+
+  /* eslint-disable consistent-return */
+  Poll.findById(pollId, (err, poll) => {
+    if (err) return res.status(400).json({ error: err });
+
+    poll.choices.push(newChoice);
+
+    poll.save((e, updatedPoll) => {
+      if (e) return jsonError(400, e, res);
+      return res.status(201).json(updatedPoll);
+    });
+  });
+  /* eslint-enable consistent-return */
+});
 
 module.exports = router;
