@@ -48,7 +48,15 @@ router.get('/user/:userId', isAuthenticated, (req, res) => {
 });
 
 // delete a poll
-router.delete('/:pollId', isAuthenticated, (req, res) => {});
+router.delete('/:pollId', isAuthenticated, (req, res) => {
+  const pollId = req.params.pollId;
+
+  Poll.findByIdAndRemove(pollId, (err, result) => {
+    if (err) return res.status(400).json({ error: 'Error deleting poll' });
+    if (result === null) return res.status(404).json({ error: 'Poll not found' });
+    return res.status(204).json();
+  });
+});
 
 // vote in a poll
 router.put('/vote/:pollId', (req, res) => {});
