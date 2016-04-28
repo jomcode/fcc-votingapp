@@ -14,7 +14,14 @@ router.get('/', (req, res) => {
 });
 
 // get specific poll
-router.get('/:pollId', (req, res) => {});
+router.get('/:pollId', (req, res) => {
+  const pollId = req.params.pollId;
+
+  Poll.findById(pollId, (err, poll) => {
+    if (err) return res.json(400).json({ error: 'Error getting poll' });
+    return res.status(200).json(Object.assign({}, { poll }));
+  });
+});
 
 // create poll
 router.post('/', isAuthenticated, (req, res) => {
