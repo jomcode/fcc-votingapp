@@ -11,9 +11,14 @@ const pollsRouter = require('./endpoints/polls');
 
 const mongoConfig = require('./config/mongo').mongoConfig;
 
-mongoose.connect(mongoConfig.url, err => {
-  if (err) console.error(`${err.name}: ${err.message}`);
-});
+const connectMongoose = () => {
+  mongoose.connect(mongoConfig.url, err => {
+    if (err) return console.error(`${err.name}: ${err.message}`);
+    return console.log('mongoose connected');
+  });
+};
+
+module.exports.connectMongoose = connectMongoose;
 
 require('./config/passport')(passport);
 
