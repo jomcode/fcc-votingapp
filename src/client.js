@@ -1,10 +1,14 @@
 import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
 import './client/main.scss';
 
-import { App } from './client/components/app';
+import configureStore from './client/redux/store/configurestore';
+import Root from './client/redux/containers/root';
 
 const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
+
+const store = configureStore();
+
+render(<Root store={store} />, rootElement);
