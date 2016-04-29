@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 import AppContainer from './redux/containers/appcontainer';
 import PollsListContainer from './redux/containers/pollslistcontainer';
