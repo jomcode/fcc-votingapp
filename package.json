@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "test": "set NODE_ENV=test&& mocha --recursive",
+    "test:watch": "set NODE_ENV=test&& nodemon --exec mocha --recursive",
+    "dev": "set NODE_ENV=development&& nodemon index.js"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
-const User = require('../models/user');
+const UserRepository = require('../storage/userrepository')();
 const tokenSecret = require('./tokensecret').tokenSecret;
 
 module.exports = (passport) => {
@@ -11,10 +11,11 @@ module.exports = (passport) => {
   };
 
   passport.use(new JwtStrategy(options, (jwtPayload, done) => {
-    User.findOne({ _id: jwtPayload._id }, (err, user) => {
-      if (err) return done(err, false);
-      if (user) return done(null, user);
-      return done(null, false);
-    });
+    UserRepository.getById(jwtPayload._id)
+      .then(user => {
+        if (user) return done(null, user);
+        return done(null, false);
+      })
+      .catch(err => done(err, false));
   }));
 };

@@ -1,9 +1,18 @@
 const express = require('express');
 
-module.exports = (storage, handlers) => {
-  const router = express.Router();
+const UserRepository = require('../storage/userrepository');
+const generateHash = require('../utilities/hash').generateHash;
 
-  router.post('/', (req, res) => handlers['/'].post(req, res, storage));
+const storage = UserRepository();
+const router = express.Router();
 
-  return router;
-};
+router.post('/', (req, res) => {
+  const newUser = Object.assign({}, req.body.user, {
+    password: generateHash(req.body.user.password)
+  });
+  storage.create(newUser)
+    .then(user => res.status(201).json({ user: { username: user.username } }))
+    .catch(() => res.status(400).json({ error: 'Registration error' }));
+});
+
+module.exports = router;
