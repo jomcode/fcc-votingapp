@@ -3,11 +3,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const passport = require('passport');
 
-const registerRouter = require('./endpoints/register');
-const authenticateRouter = require('./endpoints/authenticate');
-const pollsRouter = require('./endpoints/polls');
+const registerRouter = require('./server/endpoints/register');
+const authenticateRouter = require('./server/endpoints/authenticate');
+const pollsRouter = require('./server/endpoints/polls');
 
-require('./config/passport')(passport);
+require('./server/config/passport')(passport);
 
 const app = express();
 
