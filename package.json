@@ -6,8 +6,9 @@
   "scripts": {
     "test": "set NODE_ENV=test&& mocha --recursive",
     "test:watch": "set NODE_ENV=test&& nodemon --exec mocha --recursive",
-    "dev:server": "set NODE_ENV=development&& nodemon index.js",
+    "dev:server": "set NODE_ENV=development&& nodemon --ignore src/client.js --ignore src/client index.js",
     "dev:client": "set NODE_ENV=development&& webpack-dev-server",
+    "dev": "concurrently -k \"npm run dev:server\" \"npm run dev:client\"",
     "build:client": "set NODE_ENV=production&& webpack"
   },
   "repository": {
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/jomcode/fcc-votingapp#readme",
   "dependencies": {
+    "babel-polyfill": "^6.7.4",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
@@ -32,7 +34,13 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.0.0",
     "react": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.4.0",
+    "react-router-redux": "^4.0.4",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.0.1",
+    "whatwg-fetch": "^1.0.0"
   },
   "engines": {
     "node": "4.4.3"
@@ -45,6 +53,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
+    "concurrently": "^2.0.0",
     "css-loader": "^0.23.1",
     "dotenv": "^2.0.0",
     "html-webpack-plugin": "^2.16.0",
