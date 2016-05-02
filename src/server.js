@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const passport = require('passport');
 const path = require('path');
+const cors = require('cors');
 
 const registerRouter = require('./server/endpoints/register');
 const authenticateRouter = require('./server/endpoints/authenticate');
@@ -12,6 +13,7 @@ require('./server/config/passport')(passport);
 
 const app = express();
 
+app.use(cors());
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 if (process.env.NODE_ENV === 'production') app.use(morgan('combined'));

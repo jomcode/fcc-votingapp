@@ -20,6 +20,7 @@
     "vars-on-top": [0],
     "global-require": [0],
     "no-underscore-dangle": [0],
-    "no-confusing-arrow": [0]
+    "no-confusing-arrow": [0],
+    "react/prop-types": [0]
   }
 }

@@ -64,6 +64,7 @@
     "babel-polyfill": "^6.7.4",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "express": "^4.13.4",
     "express-jwt": "^3.3.0",
     "jsonwebtoken": "^5.7.0",
