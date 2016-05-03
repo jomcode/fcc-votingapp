@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const PieChart = require('react-chartjs').Pie;
 
 class Chart extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Chart extends Component {
 
     return (
       <div className="pollchart">
-        <h3>Chart</h3>
+        <h3>Current Results</h3>
       </div>
     );
   }
