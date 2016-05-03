@@ -9,11 +9,14 @@ class PollsList extends Component {
     super(props);
   }
 
-  componentWillMount() {}
-
-  componentDidMount() {
+  componentWillMount() {
     const { actions, dispatch } = this.props;
     dispatch(actions.getPolls());
+  }
+
+  componentDidMount() {
+    // const { actions, dispatch } = this.props;
+    // dispatch(actions.getPolls());
   }
 
   _renderLoading = () => {
