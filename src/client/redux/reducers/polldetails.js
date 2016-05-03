@@ -3,7 +3,14 @@ import * as ActionTypes from '../constants';
 const initialState = {
   isFetching: false,
   error: null,
-  poll: {}
+  poll: {
+    _id: null,
+    ownerId: null,
+    title: null,
+    subtitle: null,
+    choices: [],
+    voterIps: []
+  }
 };
 
 const pollDetails = (state = initialState, action) => {

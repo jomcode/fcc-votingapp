@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 
-import './polldetails.scss';
-import PollChoice from './pollchoice';
+import PollChart from './pollchart';
 
 class PollDetails extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { actions, dispatch, params } = this.props;
     dispatch(actions.getPollDetails(params.pollId));
-  }
-
-  componentDidMount() {
-    // const { actions, dispatch, params } = this.props;
-    // dispatch(actions.getPollDetails(params.pollId));
   }
 
   _renderLoading = () => {
@@ -36,16 +30,7 @@ class PollDetails extends Component {
         <p>title: {poll.title}</p>
         <p>subtitle: {poll.subtitle}</p>
 
-        {
-          poll.choices ? poll.choices.map((c, i) =>
-            <PollChoice
-              key={i}
-              description={c.description}
-              votes={c.votes}
-              id={c._id}
-            />) : null
-        }
-
+        <PollChart choices={poll.choices} />
       </div>
     );
   }

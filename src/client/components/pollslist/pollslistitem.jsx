@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
-import './pollslistitem.scss';
-
-const PollsListItem = ({ title, subtitle }) => (
+const PollsListItem = ({ title, subtitle, id }) => (
   <div className="pollslistitem">
-    <p>{title}</p>
-    <p>{subtitle}</p>
+    <Link to={`/polls/${id}`}>
+      <h3>{title}</h3>
+      <p>{subtitle}</p>
+    </Link>
   </div>
 );
 

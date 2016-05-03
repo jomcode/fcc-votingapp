@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import './pollslist.scss';
 import PollsListItem from './pollslistitem';
 
 class PollsList extends Component {
@@ -9,14 +8,9 @@ class PollsList extends Component {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { actions, dispatch } = this.props;
     dispatch(actions.getPolls());
-  }
-
-  componentDidMount() {
-    // const { actions, dispatch } = this.props;
-    // dispatch(actions.getPolls());
   }
 
   _renderLoading = () => {
@@ -36,12 +30,12 @@ class PollsList extends Component {
       <div className="pollslist">
         {
           polls.map((p, i) =>
-            <Link key={i} to={`/polls/${p._id}`}>
-              <PollsListItem
-                title={p.title}
-                subtitle={p.subtitle}
-              />
-            </Link>
+            <PollsListItem
+              key={i}
+              id={p._id}
+              title={p.title}
+              subtitle={p.subtitle}
+            />
           )
         }
       </div>
