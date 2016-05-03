@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './pollslist.scss';
+import PollsListItem from './pollslistitem';
 
 class PollsList extends Component {
   constructor(props) {
@@ -16,21 +17,27 @@ class PollsList extends Component {
 
   _renderLoading = () => {
     return (
-      <div>
+      <div className="pollslist">
         <p>Loading PollsList...</p>
       </div>
     );
   };
 
   render() {
-    const { pollsList } = this.props;
+    const { polls, isFetching } = this.props.pollsList;
 
-    if (pollsList.isFetching) return this._renderLoading();
+    if (isFetching) return this._renderLoading();
 
     return (
-      <div>
+      <div className="pollslist">
         {
-          pollsList.polls.map((p, i) => <div key={i}>{p.title}</div>)
+          polls.map((p, i) =>
+            <PollsListItem
+              key={i}
+              title={p.title}
+              subtitle={p.subtitle}
+            />
+          )
         }
       </div>
     );

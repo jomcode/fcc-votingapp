@@ -4,7 +4,7 @@ import PollsList from '../../components/pollslist/pollslist';
 import * as actions from '../actions/polls';
 
 const mapStateToProps = (state) => ({
-  pollsList: state.polls.pollsList
+  pollsList: state.pollsList
 });
 
 const mapDispatchToProps = (dispatch) => ({

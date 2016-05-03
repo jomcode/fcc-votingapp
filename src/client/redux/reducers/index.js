@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import { auth } from './auth';
-import { polls } from './polls';
+import { pollsList } from './pollslist';
 
 const rootReducer = combineReducers({
   auth,
-  polls,
+  pollsList,
   routing: routerReducer
 });
 
