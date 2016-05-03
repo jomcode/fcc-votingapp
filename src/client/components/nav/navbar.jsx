@@ -14,7 +14,8 @@ class NavBar extends Component {
           <span>Voting App</span>
         </div>
         <NavLink to="/" text="Home" isIndex />
-        <NavLink to="/signup" text="Signup" />
+        <NavLink to="create" text="New Poll" />
+        <NavLink to="signup" text="Signup" />
       </div>
     );
   }

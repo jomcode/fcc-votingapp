@@ -55,6 +55,7 @@ function vote(pollId, choiceId) {
     })
       .then(resp => resp.json())
       .then(json => {
+        dispatch(castVoteSuccess());
         dispatch(getPollDetails(pollId)); // refresh details view
       })
       .catch(err => dispatch(castVoteFailure(err)));

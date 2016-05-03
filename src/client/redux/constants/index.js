@@ -27,3 +27,9 @@ export const CAST_VOTE = 'CAST_VOTE';
 export const CAST_VOTE_SUCCESS = 'CAST_VOTE_SUCCESS';
 export const CAST_VOTE_FAILURE = 'CAST_VOTE_FAILURE';
 export const RESET_CAST_VOTE = 'RESET_CAST_VOTE';
+
+/* Create Poll - for CreatePoll */
+export const CREATE_POLL = 'CREATE_POLL';
+export const CREATE_POLL_SUCCESS = 'CREATE_POLL_SUCCESS';
+export const CREATE_POLL_FAILURE = 'CREATE_POLL_FAILURE';
+export const RESET_CREATE_POLL = 'RESET_CREATE_POLL';
