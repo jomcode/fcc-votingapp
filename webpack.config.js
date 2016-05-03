@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const port = process.env.WEBPACK_PORT || 8080;
 
@@ -39,20 +40,23 @@ module.exports = {
         include: path.join(__dirname, 'src')
       },
       {
-        test: /\.scss$/,
+        test: /(\.scss|\.css)$/,
         loaders: [
           'style',
-          'css',
-          'sass',
-          'postcss'
-        ],
-        include: path.join(__dirname, 'src')
+          'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'postcss',
+          'sass'
+        ]
       }
     ]
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.scss'],
+    modulesDirectories: [
+      'node_modules',
+      path.resolve(__dirname, './node_modules')
+    ]
   },
 
   postcss: () => [autoprefixer],
