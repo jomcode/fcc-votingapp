@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
-import PollsListItem from './pollslistitem';
+import ListItem from './listitem';
 
 class PollsList extends Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class PollsList extends Component {
   _renderLoading = () => {
     return (
       <div className="pollslist">
-        <p>Loading PollsList...</p>
+        Loading PollsList...
       </div>
     );
   };
@@ -30,7 +29,7 @@ class PollsList extends Component {
       <div className="pollslist">
         {
           polls.map((p, i) =>
-            <PollsListItem
+            <ListItem
               key={i}
               id={p._id}
               title={p.title}

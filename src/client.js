@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
+import './client/main.scss';
 import configureStore from './client/redux/store/configurestore';
 import routes from './client/routes';
 

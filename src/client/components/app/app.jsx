@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
+import NavBar from '../nav/navbar';
+import NavLink from '../nav/navlink';
+
 class App extends Component {
   render() {
     return (
       <div>
-        <p>components/app.jsx</p>
+        <NavBar />
         {this.props.children}
       </div>
     );
