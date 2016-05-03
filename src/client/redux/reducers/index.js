@@ -7,12 +7,14 @@ import { auth } from './auth';
 import { pollsList } from './pollslist';
 import { pollDetails } from './polldetails';
 import { createPoll } from './createpoll';
+import { login } from './login';
 
 const rootReducer = combineReducers({
   auth,
   pollsList,
   pollDetails,
   createPoll,
+  login,
   routing: routerReducer,
   form: formReducer.plugin({
     createPoll: (state, action) => {
