@@ -33,3 +33,32 @@ function getPollDetails(id) {
 }
 
 export { getPollDetails };
+
+const castVote = () => ({
+  type: ActionTypes.CAST_VOTE
+});
+
+const castVoteSuccess = () => ({
+  type: ActionTypes.CAST_VOTE_SUCCESS
+});
+
+const castVoteFailure = () => ({
+  type: ActionTypes.CAST_VOTE_FAILURE
+});
+
+function vote(pollId, choiceId) {
+  return function(dispatch) {
+    dispatch(castVote());
+
+    return fetch(`${rootUrl}/polls/vote/${choiceId}`, {
+      method: 'PUT'
+    })
+      .then(resp => resp.json())
+      .then(json => {
+        dispatch(getPollDetails(pollId)); // refresh details view
+      })
+      .catch(err => dispatch(castVoteFailure(err)));
+  }
+}
+
+export { vote };

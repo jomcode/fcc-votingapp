@@ -43,7 +43,7 @@ router.put('/vote/:choiceId', (req, res) => storage
     .catch(err => res.status(400).json({ error: err })));
 
 // add new choice to a poll
-router.put('/addchoice/:pollId', (req, res) => storage
+router.put('/addchoice/:pollId', isAuthenticated, (req, res) => storage
   .addChoice(req.params.pollId, req.body.newChoice)
     .then(updatedPoll => res.status(201).json({ updatedPoll }))
     .catch(err => res.status(400).json({ error: err })));

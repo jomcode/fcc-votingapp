@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class PollChart extends Component {
+class Chart extends Component {
   constructor(props) {
     super(props);
   }
@@ -10,10 +10,10 @@ class PollChart extends Component {
 
     return (
       <div className="pollchart">
-        <h3>Current Results</h3>
+        <h3>Chart</h3>
       </div>
     );
   }
 }
 
-export default PollChart;
+export default Chart;

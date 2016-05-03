@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import PollChart from './pollchart';
+import Chart from './chart';
+import VoteForm from './voteform';
 
 class PollDetails extends Component {
   constructor(props) {
@@ -20,17 +21,34 @@ class PollDetails extends Component {
     );
   };
 
+  _handleVote = (data) => {
+    if (!data.pollChoice) return;
+    const { params: { pollId }, actions: { vote }, dispatch } = this.props;
+
+    const choiceId = data.pollChoice;
+    dispatch(vote(pollId, choiceId));
+  };
+
   render() {
     const { poll, isFetching } = this.props.pollDetails;
 
     if (isFetching) return this._renderLoading();
 
     return (
-      <div>
-        <p>title: {poll.title}</p>
-        <p>subtitle: {poll.subtitle}</p>
+      <div className="polldetails">
+        <h2>{poll.title}</h2>
+        <p>{poll.subtitle}</p>
 
-        <PollChart choices={poll.choices} />
+        <Chart choices={poll.choices} />
+
+        <VoteForm
+          choices={
+            poll.choices.map((c, i) =>
+              <option key={i} value={c._id}>{c.description}</option>
+            )
+          }
+          onSubmit={this._handleVote}
+        />
       </div>
     );
   }
