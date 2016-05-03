@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 import './pollslist.scss';
 import PollsListItem from './pollslistitem';
@@ -32,11 +33,12 @@ class PollsList extends Component {
       <div className="pollslist">
         {
           polls.map((p, i) =>
-            <PollsListItem
-              key={i}
-              title={p.title}
-              subtitle={p.subtitle}
-            />
+            <Link key={i} to={`/polls/${p._id}`}>
+              <PollsListItem
+                title={p.title}
+                subtitle={p.subtitle}
+              />
+            </Link>
           )
         }
       </div>
