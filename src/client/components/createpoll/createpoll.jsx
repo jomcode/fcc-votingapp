@@ -10,6 +10,7 @@ class CreatePoll extends Component {
   _handleSavePoll = (data) => {
     const { actions: { saveNewPoll }, dispatch } = this.props;
     console.log('_handleSubmit->', data);
+    dispatch(saveNewPoll(data));
   };
 
   render() {

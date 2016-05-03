@@ -1,5 +1,6 @@
 const initialState = {
-  isAuthenticated: false
+  isAuthenticated: false,
+  token: null
 };
 
 const auth = (state = initialState, action) => {

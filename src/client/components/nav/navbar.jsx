@@ -16,6 +16,7 @@ class NavBar extends Component {
         <NavLink to="/" text="Home" isIndex />
         <NavLink to="create" text="New Poll" />
         <NavLink to="signup" text="Signup" />
+        <NavLink to="login" text="Log In" />
       </div>
     );
   }
