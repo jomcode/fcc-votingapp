@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-const PieChart = require('react-chartjs').Pie;
 
 class Chart extends Component {
   constructor(props) {
