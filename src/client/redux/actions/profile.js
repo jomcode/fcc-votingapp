@@ -40,3 +40,41 @@ function getUserProfile(userId) {
 }
 
 export { getUserProfile };
+
+const deletePoll = () => ({
+  type: ActionTypes.DELETE_POLL
+});
+
+const deletePollSuccess = (pollId) => ({
+  type: ActionTypes.DELETE_POLL_SUCCESS,
+  payload: {
+    pollId
+  }
+});
+
+const deletePollFailure = () => ({
+  type: ActionTypes.DELETE_POLL_FAILURE
+});
+
+function deleteUserPoll(pollId) {
+  return function(dispatch, getState) {
+    dispatch(deletePoll());
+
+    fetch(`${rootUrl}/polls/${pollId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: getState().auth.token
+      }
+    })
+    .then(resp => {
+      if (resp.status !== 204) throw new Error(resp.json().error);
+      // TODO handle success
+      dispatch(deletePollSuccess(pollId));
+    })
+    .catch(err => dispatch(deletePollFailure(err)));
+  };
+}
+
+export { deleteUserPoll };

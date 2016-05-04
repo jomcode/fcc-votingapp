@@ -46,6 +46,12 @@ export const FETCH_USER_POLLS_SUCCESS = 'FETCH_USER_POLLS_SUCCESS';
 export const FETCH_USER_POLLS_FAILURE = 'FETCH_USER_POLLS_FAILURE';
 export const RESET_FETCH_USER_POLLS = 'RESET_FETCH_USER_POLLS';
 
+/* Delete Poll - for Profile */
+export const DELETE_POLL = 'DELETE_POLL';
+export const DELETE_POLL_SUCCESS = 'DELETE_POLL_SUCCESS';
+export const DELETE_POLL_FAILURE = 'DELETE_POLL_FAILURE';
+export const RESET_DELETE_POLL = 'RESET_DELETE_POLL';
+
 /* Edit Poll (add choice) - for EditPoll */
 export const EDIT_POLL = 'EDIT_POLL';
 export const EDIT_POLL_SUCCESS = 'EDIT_POLL_SUCCESS';

@@ -12,6 +12,12 @@ class Profile extends Component {
     dispatch(getUserProfile(userId));
   }
 
+  _handleDelete = (e) => {
+    const { actions: { deleteUserPoll }, dispatch } = this.props;
+    const { pollId } = e.target.dataset;
+    dispatch(deleteUserPoll(pollId));
+  };
+
   render() {
     const { username, profile: { polls } } = this.props;
 
@@ -24,6 +30,7 @@ class Profile extends Component {
             polls.length > 0 ?
               <UserPollsList
                 polls={polls}
+                deleteHandler={this._handleDelete}
               /> :
               <p>You haven't created any polls yet!</p>
           }

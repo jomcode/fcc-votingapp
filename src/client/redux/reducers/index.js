@@ -46,6 +46,14 @@ const rootReducer = combineReducers({
         default:
           return state;
       }
+    },
+    editPoll: (state, action) => {
+      switch (action.type) {
+        case ActionTypes.EDIT_POLL_SUCCESS:
+          return undefined;
+        default:
+          return state;
+      }
     }
   })
 });

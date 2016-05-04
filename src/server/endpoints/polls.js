@@ -33,10 +33,11 @@ router.get('/user/:userId', isAuthenticated, (req, res) => storage
     .catch(err => res.status(400).json({ error: err })));
 
 // delete a poll
-router.delete('/:pollId', isAuthenticated, (req, res) => storage
-  .deleteByPollId(req.params.pollId)
+router.delete('/:pollId', isAuthenticated, (req, res) => {
+  storage.deleteByPollId(req.params.pollId)
     .then(() => res.status(204).json())
-    .catch(err => res.status(400).json({ error: err })));
+    .catch(err => res.status(400).json({ error: err }));
+});
 
 // vote in a poll
 router.put('/vote/:choiceId', (req, res) => storage
