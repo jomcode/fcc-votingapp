@@ -33,3 +33,9 @@ export const CREATE_POLL = 'CREATE_POLL';
 export const CREATE_POLL_SUCCESS = 'CREATE_POLL_SUCCESS';
 export const CREATE_POLL_FAILURE = 'CREATE_POLL_FAILURE';
 export const RESET_CREATE_POLL = 'RESET_CREATE_POLL';
+
+/* Sign Up - for SignUp */
+export const SIGN_UP = 'SIGN_UP';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+export const RESET_SIGN_UP = 'RESET_SIGN_UP';
