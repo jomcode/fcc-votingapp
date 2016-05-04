@@ -39,3 +39,9 @@ export const SIGN_UP = 'SIGN_UP';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 export const RESET_SIGN_UP = 'RESET_SIGN_UP';
+
+/* User Profile (User Polls) - for Profile */
+export const FETCH_USER_POLLS = 'FETCH_USER_POLLS';
+export const FETCH_USER_POLLS_SUCCESS = 'FETCH_USER_POLLS_SUCCESS';
+export const FETCH_USER_POLLS_FAILURE = 'FETCH_USER_POLLS_FAILURE';
+export const RESET_FETCH_USER_POLLS = 'RESET_FETCH_USER_POLLS';

@@ -18,7 +18,11 @@ router.post('/', (req, res) => {
 
       const contents = Object.assign({}, { username: user.username, _id: user._id });
       const token = jwt.sign(contents, tokenSecret, { expiresIn: 10800 });
-      res.status(200).json({ token: `JWT ${token}` });
+      res.status(200).json({
+        token: `JWT ${token}`,
+        username: user.username,
+        userId: user._id
+      });
     })
     .catch(err => res.status(400).json({ error: err.message }));
 });

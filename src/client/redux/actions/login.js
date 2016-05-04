@@ -6,10 +6,12 @@ const login = () => ({
   type: ActionTypes.LOGIN
 });
 
-const loginSuccess = (token) => ({
+const loginSuccess = (token, userId, username) => ({
   type: ActionTypes.LOGIN_SUCCESS,
   payload: {
-    token
+    token,
+    userId,
+    username
   }
 });
 
@@ -36,7 +38,7 @@ function loginUser(username, password) {
     .then(json => {
       // TODO set auth token in localStorage / auth reducer state slice
       if (json.error) throw new Error(json.error);
-      dispatch(loginSuccess(json.token));
+      dispatch(loginSuccess(json.token, json.userId, json.username));
     })
     .catch(err => dispatch(loginFailure(err)));
   };
