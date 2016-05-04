@@ -24,6 +24,14 @@ const rootReducer = combineReducers({
         default:
           return state;
       }
+    },
+    login: (state, action) => {
+      switch (action.type) {
+        case ActionTypes.LOGIN_SUCCESS:
+          return undefined;
+        default:
+          return state;
+      }
     }
   })
 });

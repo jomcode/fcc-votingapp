@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 
 export default initialState => {
-  return createStore(
+  const store = createStore(
     rootReducer,
     initialState,
     compose(
@@ -12,4 +12,12 @@ export default initialState => {
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
+
+  if (module.hot) {
+    module.hot.accept('../reducers', () =>
+      store.replaceReducer(require('../reducers').default)
+    );
+  }
+
+  return store;
 };
