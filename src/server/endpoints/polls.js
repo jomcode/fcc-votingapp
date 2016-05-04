@@ -19,10 +19,15 @@ router.get('/:pollId', (req, res) => storage
     .catch(err => res.status(400).json({ error: err })));
 
 // create poll
-router.post('/', isAuthenticated, (req, res) => storage
-  .create(req.body.poll)
+router.post('/', isAuthenticated, (req, res) => {
+  console.log('user->', req.user);
+  console.log('req.body', req.body);
+  const newPoll = Object.assign({}, req.body.poll, { ownerId: req.user._id });
+  console.log('newPoll', newPoll);
+  storage.create(newPoll)
     .then(poll => res.status(201).json({ poll }))
-    .catch(err => res.status(400).json({ error: err })));
+    .catch(err => res.status(400).json({ error: err }));
+});
 
 // get all polls by user
 router.get('/user/:userId', isAuthenticated, (req, res) => storage

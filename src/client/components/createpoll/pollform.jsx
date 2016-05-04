@@ -11,6 +11,7 @@ class PollForm extends Component {
       fields: { title, subtitle, choices },
       handleSubmit
     } = this.props;
+
     return (
       <div>
         <form onSubmit={handleSubmit}>

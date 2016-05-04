@@ -6,28 +6,40 @@ const login = () => ({
   type: ActionTypes.LOGIN
 });
 
-const loginSuccess = () => ({
-  type: ActionTypes.LOGIN_SUCCESS
+const loginSuccess = (token) => ({
+  type: ActionTypes.LOGIN_SUCCESS,
+  payload: {
+    token
+  }
 });
 
 const loginFailure = () => ({
   type: ActionTypes.LOGIN_FAILURE
 });
 
-function loginUser() {
+function loginUser(username, password) {
   return function(dispatch) {
     dispatch(login());
 
     fetch(`${rootUrl}/authenticate`, {
-      method: 'POST'
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
     })
     .then(resp => resp.json())
     .then(json => {
       // TODO set auth token in localStorage / auth reducer state slice
-      dispatch(loginSuccess());
+      if (json.error) throw new Error(json.error);
+      dispatch(loginSuccess(json.token));
     })
     .catch(err => dispatch(loginFailure(err)));
-  }
+  };
 }
 
 export { loginUser };
