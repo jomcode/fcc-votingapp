@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import UserPollsList from './userpollslist';
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -11,9 +13,22 @@ class Profile extends Component {
   }
 
   render() {
+    const { username, profile: { polls } } = this.props;
+
     return (
       <div>
-        profile
+        <div>
+          <h1>{username}'s Polls</h1>
+
+          {
+            polls.length > 0 ?
+              <UserPollsList
+                polls={polls}
+              /> :
+              <p>You haven't created any polls yet!</p>
+          }
+
+        </div>
       </div>
     );
   }

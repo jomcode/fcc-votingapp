@@ -1,6 +1,6 @@
 import * as ActionTypes from '../constants';
 
-const rootUrl = 'http://localhost:3000/api/v1';
+import { rootUrl } from '../../config/api';
 
 const login = () => ({
   type: ActionTypes.LOGIN
