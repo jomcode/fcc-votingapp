@@ -1,5 +1,7 @@
 import * as ActionTypes from '../constants';
 
+const rootUrl = 'http://localhost:3000/api/v1';
+
 const signUp = () => ({
   type: ActionTypes.SIGN_UP
 });
@@ -12,6 +14,25 @@ const signUpFailure = () => ({
   type: ActionTypes.SIGN_UP_FAILURE
 });
 
-function signUpUser() {}
+function signUpUser(user) {
+  return function(dispatch) {
+    dispatch(signUp());
+
+    return fetch(`${rootUrl}/register`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user })
+    })
+    .then(resp => resp.json())
+    .then(json => {
+      if (json.error) throw new Error(json.error);
+      dispatch(signUpSuccess());
+    })
+    .catch(err => dispatch(signUpFailure(err)));
+  };
+}
 
 export { signUpUser };
