@@ -7,6 +7,7 @@ const ListItem = ({ id, title }) => (
     <Link to={`/polls/edit/${id}`}>
       <button type="button">Edit</button>
     </Link>
+    <button type="button">Delete</button>
   </div>
 );
 
