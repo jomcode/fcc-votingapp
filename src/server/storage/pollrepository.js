@@ -34,10 +34,10 @@ PollRepository.prototype.voteByChoiceId = function voteByChoiceId(id) {
     });
 };
 
-PollRepository.prototype.addChoice = function addChoice(pollId, choice) {
+PollRepository.prototype.addChoice = function addChoice(pollId, newChoices) {
   return this.model.findById(pollId).exec()
     .then(poll => {
-      poll.choices.push(choice);
+      newChoices.forEach(c => poll.choices.push(c));
       return poll.save();
     });
 };

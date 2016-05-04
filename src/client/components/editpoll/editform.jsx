@@ -1,39 +1,32 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 
-class PollForm extends Component {
+class EditForm extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const {
-      fields: { title, subtitle, choices }, handleSubmit } = this.props;
+    const { fields: { newChoices }, handleSubmit } = this.props;
 
     return (
       <div>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="title">Title</label>
-            <input {...title} id="title" name="title" type="text" />
           </div>
 
           <div>
             <label htmlFor="subtitle">Subtitle</label>
-            <input {...subtitle} id="subtitle" name="subtitle" type="text" />
           </div>
 
           <div>
-            <h3>Choices</h3>
-
-            <button type="button" onClick={() => choices.addField()}>Add Choice</button>
-
-            {!choices.length && <div>No choices.</div>}
+            <button type="button" onClick={() => newChoices.addField()}>Add Choice</button>
 
             {
-              choices.map((c, i) =>
+              newChoices.map((c, i) =>
                 <div key={i}>
-                  <h4>Choice #{i + 1}</h4>
+                  <h4>New Choice #{i + 1}</h4>
                   <div>
                     <label htmlFor={`choice${i + 1}`}>Description</label>
                     <input
@@ -49,7 +42,7 @@ class PollForm extends Component {
           </div>
 
           <div>
-            <button type="submit">Create</button>
+            <button type="submit">Save Changes</button>
           </div>
         </form>
       </div>
@@ -57,9 +50,9 @@ class PollForm extends Component {
   }
 }
 
-PollForm = reduxForm({
-  form: 'createPoll',
-  fields: ['title', 'subtitle', 'choices[].description']
-})(PollForm);
+EditForm = reduxForm({
+  form: 'editPoll',
+  fields: ['newChoices[].description']
+})(EditForm);
 
-export default PollForm;
+export default EditForm;

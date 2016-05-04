@@ -7,6 +7,11 @@ class UserPollsList extends Component {
     super(props);
   }
 
+  _handleDelete = (e) => {
+    const { pollId } = e.target.dataset;
+    console.log('_handleDelete', pollId);
+  };
+
   render() {
     const { polls } = this.props;
 
@@ -18,6 +23,7 @@ class UserPollsList extends Component {
               key={i}
               title={p.title}
               id={p._id}
+              onDelete={this._handleDelete}
             />
           )
         }

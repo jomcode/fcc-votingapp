@@ -3,3 +3,4 @@
 
 ## TODO
 - [ ] Make post parameter for authenticate and register endpoint consistent (object on both)
+- [ ] Use react-router onEnter onChange onLeave to polish

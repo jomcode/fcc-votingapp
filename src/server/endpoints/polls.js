@@ -20,10 +20,7 @@ router.get('/:pollId', (req, res) => storage
 
 // create poll
 router.post('/', isAuthenticated, (req, res) => {
-  console.log('user->', req.user);
-  console.log('req.body', req.body);
   const newPoll = Object.assign({}, req.body.poll, { ownerId: req.user._id });
-  console.log('newPoll', newPoll);
   storage.create(newPoll)
     .then(poll => res.status(201).json({ poll }))
     .catch(err => res.status(400).json({ error: err }));
@@ -47,10 +44,15 @@ router.put('/vote/:choiceId', (req, res) => storage
     .then(updatedPoll => res.status(201).json({ updatedPoll }))
     .catch(err => res.status(400).json({ error: err })));
 
-// add new choice to a poll
-router.put('/addchoice/:pollId', isAuthenticated, (req, res) => storage
-  .addChoice(req.params.pollId, req.body.newChoice)
+// add new choices to a poll
+router.put('/addchoices/:pollId', isAuthenticated, (req, res) => {
+  if (req.user._id.toString() !== req.body.userId.toString()) {
+    return res.status(400).json({ error: 'Invalid Request' });
+  }
+
+  return storage.addChoice(req.params.pollId, req.body.newChoices)
     .then(updatedPoll => res.status(201).json({ updatedPoll }))
-    .catch(err => res.status(400).json({ error: err })));
+    .catch(err => res.status(400).json({ error: err }));
+});
 
 module.exports = router;

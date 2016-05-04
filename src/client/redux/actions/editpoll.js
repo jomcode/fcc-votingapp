@@ -14,11 +14,27 @@ const editPollFailure = () => ({
   type: ActionTypes.EDIT_POLL_FAILURE
 });
 
-function editUserPoll() {
-  return function(dispatch) {
+function addNewChoices(pollId, newChoices) {
+  return function(dispatch, getState) {
     dispatch(editPoll());
-    // TODO
-  }
+
+    fetch(`${rootUrl}/polls/addchoices/${pollId}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: getState().auth.token
+      },
+      body: JSON.stringify({ newChoices, userId: getState().auth.userId })
+    })
+    .then(resp => resp.json())
+    .then(json => {
+      if (json.error) throw new Error(json.error);
+      dispatch(editPollSuccess());
+    })
+    .catch(err => dispatch(editPollFailure(err)));
+  };
 }
 
-export { editUserPoll };
+export { addNewChoices };
+export { getPollDetails } from './polldetails';
