@@ -11,7 +11,7 @@ import SignUpContainer from './redux/containers/signupcontainer';
 const routes = (
   <Route path="/" component={AppContainer}>
     <IndexRoute component={PollsListContainer} />
-    <Route path="polls/:pollId" component={PollDetailsContainer} />
+    <Route path="polls/details/:pollId" component={PollDetailsContainer} />
     <Route path="create" component={CreatePollContainer} />
     <Route path="login" component={LoginContainer} />
     <Route path="signup" component={SignUpContainer} />

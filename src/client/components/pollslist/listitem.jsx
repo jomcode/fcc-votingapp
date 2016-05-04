@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const ListItem = ({ id, title, subtitle }) => (
   <div className="pollslistitem">
-    <Link to={`/polls/${id}`}>
+    <Link to={`/polls/details/${id}`}>
       <h4>{title}</h4>
       <p>{subtitle}</p>
     </Link>
