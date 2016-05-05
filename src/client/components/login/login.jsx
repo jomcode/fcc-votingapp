@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import LoginForm from './loginform';
 
 class Login extends Component {
-  static contextTypes = { router: React.PropTypes.object };
-
   constructor(props) {
     super(props);
   }
 
   componentDidUpdate() {
-    const { router } = this.context;
+    const { router } = this.props;
     if (this.props.isAuthenticated) router.push('profile');
   }
 
@@ -40,5 +39,7 @@ class Login extends Component {
     );
   }
 }
+
+Login = withRouter(Login);
 
 export default Login;
