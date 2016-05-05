@@ -17,8 +17,6 @@ class Chart extends Component {
       color: `#${getRandomColor()}`
     }));
 
-    console.log('chartData', chartData);
-
     return (
       <div className="pollchart">
         <PieChart data={chartData} />
