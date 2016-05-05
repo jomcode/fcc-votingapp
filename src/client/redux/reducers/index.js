@@ -11,6 +11,7 @@ import { login } from './login';
 import { signUp } from './signup';
 import { profile } from './profile';
 import { editPoll } from './editpoll';
+import { logout } from './logout';
 
 const rootReducer = combineReducers({
   auth,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   signUp,
   profile,
   editPoll,
+  logout,
   routing: routerReducer,
   form: formReducer.plugin({
     createPoll: (state, action) => {

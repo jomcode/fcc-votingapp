@@ -22,7 +22,7 @@ const createPoll = (state = initialState, action) => {
     }
 
     case ActionTypes.RESET_CREATE_POLL: {
-      return initialState;
+      return Object.assign({}, initialState);
     }
 
     default:

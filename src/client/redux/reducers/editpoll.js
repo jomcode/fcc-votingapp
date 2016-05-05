@@ -22,7 +22,7 @@ const editPoll = (state = initialState, action) => {
     }
 
     case ActionTypes.RESET_EDIT_POLL: {
-      return initialState;
+      return Object.assign({}, initialState);
     }
 
     default:

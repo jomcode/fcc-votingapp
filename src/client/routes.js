@@ -9,6 +9,7 @@ import LoginContainer from './redux/containers/logincontainer';
 import SignUpContainer from './redux/containers/signupcontainer';
 import ProfileContainer from './redux/containers/profilecontainer';
 import EditPollContainer from './redux/containers/editpollcontainer';
+import LogoutContainer from './redux/containers/logoutcontainer';
 
 const routes = (
   <Route path="/" component={AppContainer}>
@@ -19,6 +20,7 @@ const routes = (
     <Route path="signup" component={SignUpContainer} />
     <Route path="profile" component={ProfileContainer} />
     <Route path="polls/edit/:pollId" component={EditPollContainer} />
+    <Route path="logout" component={LogoutContainer} />
   </Route>
 );
 

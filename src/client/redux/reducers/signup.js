@@ -22,7 +22,7 @@ const signUp = (state = initialState, action) => {
     }
 
     case ActionTypes.RESET_SIGN_UP: {
-      return initialState;
+      return Object.assign({}, initialState);
     }
 
     default:

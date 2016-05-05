@@ -26,7 +26,7 @@ const pollsList = (state = initialState, action) => {
     }
 
     case ActionTypes.RESET_POLLS: {
-      return initialState;
+      return Object.assign({}, initialState);
     }
 
     default:

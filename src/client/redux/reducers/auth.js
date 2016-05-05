@@ -18,6 +18,10 @@ const auth = (state = initialState, action) => {
       });
     }
 
+    case ActionTypes.LOGOUT_SUCCESS: {
+      return Object.assign({}, initialState);
+    }
+
     default:
       return state;
   }

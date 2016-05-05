@@ -6,10 +6,33 @@ class Logout extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    const { router, isAuthenticated } = this.props;
+    if (!isAuthenticated) router.push('/');
+  }
+
+  componentDidMount() {
+    const { actions: { logoutUser }, dispatch } = this.props;
+    dispatch(logoutUser());
+  }
+
+  componentDidUpdate() {
+    const { router, isAuthenticated } = this.props;
+    if (!isAuthenticated) router.push('/');
+  }
+
+  _renderLoading = () => {
+    return (<p>Logging out...</p>);
+  };
+
   render() {
+    const { logout: { isFetching } } = this.props;
+
+    if (isFetching) return this._renderLoading();
+
     return (
       <div>
-        logout.jsx
+        <p>Logged out successfully</p>
       </div>
     );
   }
