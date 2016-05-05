@@ -10,7 +10,7 @@
     "dev:client": "better-npm-run dev:client",
     "dev": "better-npm-run dev",
     "build:client": "better-npm-run build:client",
-    "start": "npm run build:client && node index.js"
+    "start": "webpack && node index.js"
   },
   "betterScripts": {
     "dev:server": {
