@@ -1,6 +1,7 @@
 /* variables */
 $font-stack: 'Open Sans', sans-serif;
 $primary: #2e8fa4;
+$accent: adjust-hue($primary, 180);
 $white: #fff;
 $hover-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 

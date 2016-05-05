@@ -66,7 +66,7 @@ function getPlugins() {
     }),
     new HtmlPlugin({
       template: 'node_modules/html-webpack-template/index.ejs',
-      title: 'Free Code Camp - Voting App',
+      title: 'Voting App',
       appMountId: 'root',
       inject: false,
       mobile: true

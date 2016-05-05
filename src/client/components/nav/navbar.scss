@@ -24,16 +24,28 @@
   }
 
   a {
+    flex-shrink: 1;
+
     text-align: center;
     text-decoration: none;
     color: $white;
-    flex-basis: 90px;
     padding: 0.75em;
     margin: 0.5em;
 
     &:hover {
       color: $primary;
       background-color: $white;
+    }
+
+    &.active-nav {
+      font-weight: 700;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
+
+    &.active-nav:hover {
+      color: $white;
+      background-color: $primary;
     }
   }
 }

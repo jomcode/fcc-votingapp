@@ -5,9 +5,11 @@ import NavLink from '../nav/navlink';
 
 class App extends Component {
   render() {
+    const { auth: { isAuthenticated, username } } = this.props;
+
     return (
       <div>
-        <NavBar />
+        <NavBar isAuthenticated={isAuthenticated} username={username} />
         {this.props.children}
       </div>
     );
