@@ -6,13 +6,22 @@ const editPoll = () => ({
   type: ActionTypes.EDIT_POLL
 });
 
-const editPollSuccess = () => ({
-  type: ActionTypes.EDIT_POLL_SUCCESS
+const editPollSuccess = (updatedPoll) => ({
+  type: ActionTypes.EDIT_POLL_SUCCESS,
+  payload: {
+    updatedPoll
+  }
 });
 
 const editPollFailure = () => ({
   type: ActionTypes.EDIT_POLL_FAILURE
 });
+
+const resetEditPoll = () => ({
+  type: ActionTypes.RESET_EDIT_POLL
+});
+
+export { resetEditPoll };
 
 function addNewChoices(pollId, newChoices) {
   return function(dispatch, getState) {
@@ -30,11 +39,10 @@ function addNewChoices(pollId, newChoices) {
     .then(resp => resp.json())
     .then(json => {
       if (json.error) throw new Error(json.error);
-      dispatch(editPollSuccess());
+      dispatch(editPollSuccess(json.updatedPoll));
     })
     .catch(err => dispatch(editPollFailure(err)));
   };
 }
 
 export { addNewChoices };
-export { getPollDetails } from './polldetails';
