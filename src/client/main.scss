@@ -1,7 +1,17 @@
+/* variables */
 $font-stack: 'Open Sans', sans-serif;
 $primary: #2e8fa4;
 $white: #fff;
 $hover-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+
+@import './components/createpoll/createpoll.scss';
+@import './components/editpoll/editpoll.scss';
+@import './components/login/login.scss';
+@import './components/nav/navbar.scss';
+@import './components/polldetails/polldetails.scss';
+@import './components/pollslist/pollslist.scss';
+@import './components/profile/profile.scss';
+@import './components/signup/signup.scss';
 
 html {
   height: 100%;
@@ -11,100 +21,4 @@ body {
   height: 100%;
   margin: 0;
   font-family: $font-stack;
-}
-
-.navbar {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: center;
-
-  background-color: $primary;
-  width: 100%;
-  height: 75px;
-
-  div {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-
-    span {
-      padding: 0 0 0 1em;
-      font-size: 1.2em;
-      color: $white;
-    }
-  }
-
-  a {
-    text-align: center;
-    text-decoration: none;
-    color: $white;
-    flex-basis: 90px;
-    padding: 0.75em;
-    margin: 0.5em;
-
-    &:hover {
-      color: $primary;
-      background-color: $white;
-    }
-  }
-}
-
-.pollslist {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  width: 80%;
-}
-
-.pollslistitem {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-
-  margin: 1em 0 0 0;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 2px;
-
-  &:last-child {
-    margin-bottom: 1em;
-  }
-
-  &:hover {
-    box-shadow: $hover-shadow;
-  }
-
-  /* PollsList Item Contents */
-  a {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-
-    text-decoration: none;
-    width: 100%;
-
-    h4 {
-      margin: 0;
-      font-size: 1.2em;
-    }
-
-    p {
-      margin: 0;
-      font-style: italic;
-      font-size: 1em;
-    }
-  }
-}
-
-.polldetails {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
 }

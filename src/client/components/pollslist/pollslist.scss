@@ -1,0 +1,47 @@
+.pollslist {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 80%;
+}
+
+.pollslistitem {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  margin: 1em 0 0 0;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+
+  &:last-child {
+    margin-bottom: 1em;
+  }
+
+  &:hover {
+    box-shadow: $hover-shadow;
+  }
+
+  /* PollsList Item Contents */
+  a {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    text-decoration: none;
+    width: 100%;
+
+    h4 {
+      margin: 0;
+      font-size: 1.2em;
+    }
+
+    p {
+      margin: 0;
+      font-style: italic;
+      font-size: 1em;
+    }
+  }
+}
