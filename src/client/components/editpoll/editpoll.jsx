@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import EditForm from './editform';
 
 class EditPoll extends Component {
-  static contextTypes = { router: React.PropTypes.object };
-
   constructor(props) {
     super(props);
   }
 
   componentDidUpdate() {
-    const {
-      context: { router },
-      props: { editPoll, actions: { resetEditPoll }, dispatch }
-    } = this;
+    const { editPoll, router, dispatch, actions: { resetEditPoll } } = this.props;
 
     if (editPoll.updatedPoll !== null) {
       router.push(`polls/details/${editPoll.updatedPoll._id}`);
@@ -40,5 +36,7 @@ class EditPoll extends Component {
     );
   }
 }
+
+EditPoll = withRouter(EditPoll);
 
 export default EditPoll;

@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import SignUpForm from './signupform';
 
 class SignUp extends Component {
-  static contextTypes = { router: React.PropTypes.object };
+  // static contextTypes = { router: React.PropTypes.object };
 
   constructor(props) {
     super(props);
   }
 
   componentDidUpdate() {
-    const {
-      context: { router },
-      props: { signUp, actions: { resetSignUp }, dispatch }
-    } = this;
-
+    // const {
+      // context: { router },
+      // props: { signUp, actions: { resetSignUp }, dispatch }
+    // } = this;
+    const { signUp, dispatch, router, actions: { resetSignUp } } = this.props;
     if (signUp.user !== null) {
       router.push('/');
       dispatch(resetSignUp());
@@ -50,5 +51,7 @@ class SignUp extends Component {
     );
   }
 }
+
+SignUp = withRouter(SignUp);
 
 export default SignUp;

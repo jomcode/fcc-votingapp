@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import PollForm from './pollform';
 
 class CreatePoll extends Component {
-  static contextTypes = { router: React.PropTypes.object };
-
   constructor(props) {
     super(props);
   }
 
   componentDidUpdate() {
-    const {
-      context: { router },
-      props: { createPoll, actions: { resetCreatePoll }, dispatch }
-    } = this;
-
+    const { createPoll, dispatch, router, actions: { resetCreatePoll } } = this.props;
     if (createPoll.poll !== null) {
       router.push(`polls/details/${createPoll.poll._id}`);
       dispatch(resetCreatePoll());
@@ -37,5 +32,7 @@ class CreatePoll extends Component {
     );
   }
 }
+
+CreatePoll = withRouter(CreatePoll);
 
 export default CreatePoll;
