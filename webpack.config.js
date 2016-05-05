@@ -64,7 +64,7 @@ module.exports = {
   plugins: [
     new HtmlPlugin({
       template: 'node_modules/html-webpack-template/index.ejs',
-      title: 'Title',
+      title: 'Free Code Camp - Voting App',
       appMountId: 'root',
       inject: false,
       mobile: true
