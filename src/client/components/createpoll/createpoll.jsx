@@ -8,6 +8,11 @@ class CreatePoll extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    const { router, isAuthenticated } = this.props;
+    if (!isAuthenticated) router.push('/');
+  }
+
   componentDidUpdate() {
     const { createPoll, dispatch, router, actions: { resetCreatePoll } } = this.props;
     if (createPoll.poll !== null) {

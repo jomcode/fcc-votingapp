@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import UserPollsList from './userpollslist';
 
 class Profile extends Component {
   constructor(props) {
-    super(props);
+    super(props);//
+  }
+
+  componentWillMount() {
+    const { router, isAuthenticated } = this.props;
+    if (!isAuthenticated) router.push('/');
   }
 
   componentDidMount() {
@@ -40,5 +46,7 @@ class Profile extends Component {
     );
   }
 }
+
+Profile = withRouter(Profile);
 
 export default Profile;

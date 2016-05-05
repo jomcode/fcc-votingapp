@@ -5,7 +5,8 @@ import CreatePoll from '../../components/createpoll/createpoll';
 import * as actions from '../actions/createpoll';
 
 const mapStateToProps = (state) => ({
-  createPoll: state.createPoll
+  createPoll: state.createPoll,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = (dispatch) => ({

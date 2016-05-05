@@ -8,6 +8,11 @@ class EditPoll extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    const { router, isAuthenticated } = this.props;
+    if (!isAuthenticated) router.push('/');
+  }
+
   componentDidUpdate() {
     const { editPoll, router, dispatch, actions: { resetEditPoll } } = this.props;
 
