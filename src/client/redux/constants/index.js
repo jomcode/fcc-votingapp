@@ -57,3 +57,5 @@ export const EDIT_POLL = 'EDIT_POLL';
 export const EDIT_POLL_SUCCESS = 'EDIT_POLL_SUCCESS';
 export const EDIT_POLL_FAILURE = 'EDIT_POLL_FAILURE';
 export const RESET_EDIT_POLL = 'RESET_EDIT_POLL';
+
+/* Happening */

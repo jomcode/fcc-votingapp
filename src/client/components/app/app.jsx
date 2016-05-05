@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import NavBar from '../nav/navbar';
-import Happening from '../happening/happening';
+import HappeningContainer from '../../redux/containers/happeningcontainer';
 
 class App extends Component {
   render() {
@@ -10,6 +10,7 @@ class App extends Component {
     return (
       <div>
         <NavBar isAuthenticated={isAuthenticated} username={username} />
+        <HappeningContainer />
         {this.props.children}
       </div>
     );
