@@ -2,7 +2,8 @@ import * as ActionTypes from '../constants';
 
 const initialState = {
   isFetching: false,
-  error: null
+  error: null,
+  user: null
 };
 
 const signUp = (state = initialState, action) => {
@@ -12,11 +13,16 @@ const signUp = (state = initialState, action) => {
     }
 
     case ActionTypes.SIGN_UP_SUCCESS: {
-      return Object.assign({}, state, { isFetching: false });
+      const updatedUser = Object.assign({}, action.payload.user);
+      return Object.assign({}, state, { isFetching: false, user: updatedUser });
     }
 
     case ActionTypes.SIGN_UP_FAILURE: {
       return Object.assign({}, state, { isFetching: false });
+    }
+
+    case ActionTypes.RESET_SIGN_UP: {
+      return initialState;
     }
 
     default:

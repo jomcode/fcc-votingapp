@@ -6,12 +6,19 @@ const signUp = () => ({
   type: ActionTypes.SIGN_UP
 });
 
-const signUpSuccess = () => ({
-  type: ActionTypes.SIGN_UP_SUCCESS
+const signUpSuccess = (user) => ({
+  type: ActionTypes.SIGN_UP_SUCCESS,
+  payload: {
+    user
+  }
 });
 
 const signUpFailure = () => ({
   type: ActionTypes.SIGN_UP_FAILURE
+});
+
+export const resetSignUp = () => ({
+  type: ActionTypes.RESET_SIGN_UP
 });
 
 function signUpUser(user) {
@@ -29,7 +36,7 @@ function signUpUser(user) {
     .then(resp => resp.json())
     .then(json => {
       if (json.error) throw new Error(json.error);
-      dispatch(signUpSuccess());
+      dispatch(signUpSuccess(json.user));
     })
     .catch(err => dispatch(signUpFailure(err)));
   };
