@@ -39,6 +39,7 @@ class PollDetails extends Component {
         <h2>{poll.title}</h2>
         <p>{poll.subtitle}</p>
 
+        <h3>Current Results</h3>
         <Chart choices={poll.choices} />
 
         <VoteForm
