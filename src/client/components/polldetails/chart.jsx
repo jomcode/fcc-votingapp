@@ -19,11 +19,22 @@ class Chart extends Component {
       return total + c.votes;
     }, 0);
 
-    const chartData = choices.map(c => Object.assign({}, {
+    const valuesLabels = choices.map(c => Object.assign({}, {
       value: c.votes,
       label: c.description,
-      color: `#${getRandomColor()}`
+      color: getRandomColor()
     }));
+
+    // TODO refactor this because its awful
+    const uniqueColors = valuesLabels.map((d, i, a) => {
+      const temp = getRandomColor();
+
+      if (a.indexOf(temp) === -1) return temp;
+    });
+
+    const chartData = valuesLabels.map((d, i) => {
+      return Object.assign({}, d, { color: uniqueColors[i] });
+    });
 
     return (
       <div className="pollchart">
