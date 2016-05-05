@@ -108,11 +108,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.scss'],
-    modulesDirectories: [
-      'node_modules',
-      path.resolve(__dirname, './node_modules')
-    ]
+    extensions: ['', '.js', '.jsx', '.scss']
   },
 
   postcss: () => [autoprefixer],
