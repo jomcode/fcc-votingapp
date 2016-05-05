@@ -40,6 +40,25 @@ function getModuleLoaders() {
   return loaders;
 }
 
+function getDevServer() {
+  if (!isProduction) {
+    return {
+      contentBase: path.join(__dirname, 'public'),
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      progress: true,
+      stats: {
+        colors: true,
+        chunks: false
+      },
+      host: 'localhost',
+      port: port
+    };
+  }
+  return null;
+}
+
 function getPlugins() {
   const plugins = [
     new webpack.DefinePlugin({
@@ -59,7 +78,7 @@ function getPlugins() {
       new ExtractTextPlugin('style.css'),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin()
+      new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
     );
   }
 
@@ -82,19 +101,7 @@ module.exports = {
     filename: '[name].js'
   },
 
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    progress: true,
-    stats: {
-      colors: true,
-      chunks: false
-    },
-    host: 'localhost',
-    port: port
-  },
+  devServer: getDevServer(),
 
   module: {
     loaders: getModuleLoaders()
