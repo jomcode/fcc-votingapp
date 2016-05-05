@@ -24,6 +24,8 @@ class NavBar extends Component {
         {!isAuthenticated ? <NavLink to="login" text="Log In" /> : null}
 
         {isAuthenticated ? <NavLink to="profile" text="Profile" /> : null}
+
+        {isAuthenticated ? <NavLink to="logout" text="Log Out" /> : null}
       </div>
     );
   }
