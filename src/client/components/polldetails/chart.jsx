@@ -8,8 +8,16 @@ class Chart extends Component {
     super(props);
   }
 
+  _renderNoVotes = () => {
+    return (<p>No votes cast yet!</p>);
+  };
+
   render() {
     const { choices } = this.props;
+
+    const totalVotes = choices.reduce((total, c) => {
+      return total + c.votes;
+    }, 0);
 
     const chartData = choices.map(c => Object.assign({}, {
       value: c.votes,
@@ -19,7 +27,7 @@ class Chart extends Component {
 
     return (
       <div className="pollchart">
-        <PieChart data={chartData} />
+        {totalVotes > 0 ? <PieChart data={chartData} /> : this._renderNoVotes()}
       </div>
     );
   }
