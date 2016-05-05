@@ -13,8 +13,9 @@ const createPollSuccess = (poll) => ({
   }
 });
 
-const createPollFailure = () => ({
-  type: ActionTypes.CREATE_POLL_FAILURE
+const createPollFailure = (error) => ({
+  type: ActionTypes.CREATE_POLL_FAILURE,
+  error
 });
 
 const resetCreatePoll = () => ({
@@ -42,7 +43,7 @@ function saveNewPoll(poll) {
       if (json.error) throw new Error(json.error);
       dispatch(createPollSuccess(json.poll));
     })
-    .catch(err => dispatch(createPollFailure(err)));
+    .catch(err => dispatch(createPollFailure('Error creating new poll')));
   };
 }
 

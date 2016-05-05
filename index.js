@@ -4,7 +4,7 @@ const server = require('./src/server').server;
 const mongoConfig = require('./src/server/config/mongo').mongoConfig;
 
 mongoose.connect(mongoConfig.url, err => {
-  if (err) return console.error(`${err.name}: ${err.message}`);
+  if (err) throw err;
   return null;
 });
 

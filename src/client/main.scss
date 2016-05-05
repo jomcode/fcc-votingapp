@@ -3,6 +3,8 @@ $font-stack: 'Open Sans', sans-serif;
 $primary: #2e8fa4;
 $accent: adjust-hue($primary, 180);
 $white: #fff;
+$red: #d94242;
+$green: #1eb656;
 $hover-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 
 @import './components/createpoll/createpoll.scss';
@@ -13,6 +15,7 @@ $hover-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 @import './components/pollslist/pollslist.scss';
 @import './components/profile/profile.scss';
 @import './components/signup/signup.scss';
+@import './components/notification/notification.scss';
 
 html {
   height: 100%;
@@ -23,3 +26,5 @@ body {
   margin: 0;
   font-family: $font-stack;
 }
+
+.votingapp-container {}

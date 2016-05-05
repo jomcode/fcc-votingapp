@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { middleware as notificationsMiddleware } from 'react-redux-notifications';
 
 import rootReducer from '../reducers';
 
@@ -8,7 +9,7 @@ export default initialState => {
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(thunk),
+      applyMiddleware(thunk, notificationsMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );

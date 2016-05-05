@@ -15,7 +15,7 @@ class Profile extends Component {
 
   componentDidMount() {
     const { actions: { getUserProfile }, dispatch, userId } = this.props;
-    dispatch(getUserProfile(userId));
+    if (userId) dispatch(getUserProfile(userId));
   }
 
   _handleDelete = (e) => {

@@ -15,8 +15,9 @@ const loginSuccess = (token, userId, username) => ({
   }
 });
 
-const loginFailure = () => ({
-  type: ActionTypes.LOGIN_FAILURE
+const loginFailure = (error) => ({
+  type: ActionTypes.LOGIN_FAILURE,
+  error
 });
 
 function loginUser(username, password) {
@@ -40,7 +41,7 @@ function loginUser(username, password) {
       if (json.error) throw new Error(json.error);
       dispatch(loginSuccess(json.token, json.userId, json.username));
     })
-    .catch(err => dispatch(loginFailure(err)));
+    .catch(err => dispatch(loginFailure(err.message)));
   };
 }
 

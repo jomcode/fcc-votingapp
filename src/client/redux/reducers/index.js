@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
+import { reducer as notifications } from 'react-redux-notifications';
 
 import * as ActionTypes from '../constants';
 import { auth } from './auth';
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   profile,
   editPoll,
   logout,
+  notifications,
   routing: routerReducer,
   form: formReducer.plugin({
     createPoll: (state, action) => {

@@ -13,8 +13,9 @@ const fetchPollDetailsSuccess = (poll) => ({
   }
 });
 
-const fetchPollDetailsFailure = () => ({
-  type: ActionTypes.FETCH_POLL_DETAILS_FAILURE
+const fetchPollDetailsFailure = (error) => ({
+  type: ActionTypes.FETCH_POLL_DETAILS_FAILURE,
+  error
 });
 
 const resetPollDetails = () => ({
@@ -28,7 +29,7 @@ function getPollDetails(id) {
     return fetch(`${rootUrl}/polls/${id}`)
       .then(resp => resp.json())
       .then(json => dispatch(fetchPollDetailsSuccess(json.poll)))
-      .catch(err => dispatch(fetchPollDetailsFailure(err)));
+      .catch(err => dispatch(fetchPollDetailsFailure(err.message)));
   };
 }
 
@@ -42,8 +43,9 @@ const castVoteSuccess = () => ({
   type: ActionTypes.CAST_VOTE_SUCCESS
 });
 
-const castVoteFailure = () => ({
-  type: ActionTypes.CAST_VOTE_FAILURE
+const castVoteFailure = (error) => ({
+  type: ActionTypes.CAST_VOTE_FAILURE,
+  error
 });
 
 function vote(pollId, choiceId) {
@@ -56,9 +58,9 @@ function vote(pollId, choiceId) {
       .then(resp => resp.json())
       .then(json => {
         dispatch(castVoteSuccess());
-        dispatch(getPollDetails(pollId)); // refresh details view
+        dispatch(getPollDetails(pollId));
       })
-      .catch(err => dispatch(castVoteFailure(err)));
+      .catch(err => dispatch(castVoteFailure(err.message)));
   }
 }
 

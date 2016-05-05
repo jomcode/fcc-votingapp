@@ -13,14 +13,6 @@ class EditForm extends Component {
       <div>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="title">Title</label>
-          </div>
-
-          <div>
-            <label htmlFor="subtitle">Subtitle</label>
-          </div>
-
-          <div>
             <button type="button" onClick={() => newChoices.addField()}>Add Choice</button>
 
             {

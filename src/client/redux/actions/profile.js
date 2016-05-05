@@ -13,8 +13,9 @@ const fetchUserPollsSuccess = (polls) => ({
   }
 });
 
-const fetchUserPollsFailure = () => ({
-  type: ActionTypes.FETCH_USER_POLLS_FAILURE
+const fetchUserPollsFailure = (error) => ({
+  type: ActionTypes.FETCH_USER_POLLS_FAILURE,
+  error
 });
 
 function getUserProfile(userId) {
@@ -32,10 +33,9 @@ function getUserProfile(userId) {
     .then(resp => resp.json())
     .then(json => {
       if (json.error) throw new Error(json.error);
-      // TODO handle success
       dispatch(fetchUserPollsSuccess(json.polls));
     })
-    .catch(err => dispatch(fetchUserPollsFailure(err)));
+    .catch(err => dispatch(fetchUserPollsFailure(err.message)));
   };
 }
 
@@ -52,8 +52,9 @@ const deletePollSuccess = (pollId) => ({
   }
 });
 
-const deletePollFailure = () => ({
-  type: ActionTypes.DELETE_POLL_FAILURE
+const deletePollFailure = (error) => ({
+  type: ActionTypes.DELETE_POLL_FAILURE,
+  error
 });
 
 function deleteUserPoll(pollId) {
@@ -70,10 +71,9 @@ function deleteUserPoll(pollId) {
     })
     .then(resp => {
       if (resp.status !== 204) throw new Error(resp.json().error);
-      // TODO handle success
       dispatch(deletePollSuccess(pollId));
     })
-    .catch(err => dispatch(deletePollFailure(err)));
+    .catch(err => dispatch(deletePollFailure(err.message)));
   };
 }
 

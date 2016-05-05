@@ -8,8 +8,9 @@ const logoutSuccess = () => ({
   type: ActionTypes.LOGOUT_SUCCESS
 });
 
-const logoutFailure = () => ({
-  type: ActionTypes.LOGOUT_FAILURE
+const logoutFailure = (error) => ({
+  type: ActionTypes.LOGOUT_FAILURE,
+  error
 });
 
 const resetLogout = () => ({

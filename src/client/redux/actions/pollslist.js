@@ -13,8 +13,9 @@ const fetchPollsSuccess = (polls) => ({
   }
 });
 
-const fetchPollsFailure = () => ({
-  type: ActionTypes.FETCH_POLLS_FAILURE
+const fetchPollsFailure = (error) => ({
+  type: ActionTypes.FETCH_POLLS_FAILURE,
+  error
 });
 
 const resetPolls = () => ({
@@ -28,7 +29,7 @@ function getPolls() {
     return fetch(`${rootUrl}/polls`)
       .then(resp => resp.json())
       .then(json => dispatch(fetchPollsSuccess(json.polls)))
-      .catch(err => dispatch(fetchPollsFailure(err)));
+      .catch(err => dispatch(fetchPollsFailure(err.message)));
   };
 }
 

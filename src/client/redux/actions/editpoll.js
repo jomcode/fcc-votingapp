@@ -13,8 +13,9 @@ const editPollSuccess = (updatedPoll) => ({
   }
 });
 
-const editPollFailure = () => ({
-  type: ActionTypes.EDIT_POLL_FAILURE
+const editPollFailure = (error) => ({
+  type: ActionTypes.EDIT_POLL_FAILURE,
+  error
 });
 
 const resetEditPoll = () => ({
@@ -41,7 +42,7 @@ function addNewChoices(pollId, newChoices) {
       if (json.error) throw new Error(json.error);
       dispatch(editPollSuccess(json.updatedPoll));
     })
-    .catch(err => dispatch(editPollFailure(err)));
+    .catch(err => dispatch(editPollFailure(err.message)));
   };
 }
 

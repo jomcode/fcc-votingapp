@@ -13,8 +13,9 @@ const signUpSuccess = (user) => ({
   }
 });
 
-const signUpFailure = () => ({
-  type: ActionTypes.SIGN_UP_FAILURE
+const signUpFailure = (error) => ({
+  type: ActionTypes.SIGN_UP_FAILURE,
+  error
 });
 
 const resetSignUp = () => ({
@@ -40,7 +41,7 @@ function signUpUser(user) {
       if (json.error) throw new Error(json.error);
       dispatch(signUpSuccess(json.user));
     })
-    .catch(err => dispatch(signUpFailure(err)));
+    .catch(err => dispatch(signUpFailure(err.message)));
   };
 }
 
