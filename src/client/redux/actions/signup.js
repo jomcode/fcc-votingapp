@@ -17,9 +17,11 @@ const signUpFailure = () => ({
   type: ActionTypes.SIGN_UP_FAILURE
 });
 
-export const resetSignUp = () => ({
+const resetSignUp = () => ({
   type: ActionTypes.RESET_SIGN_UP
 });
+
+export { resetSignUp };
 
 function signUpUser(user) {
   return function(dispatch) {

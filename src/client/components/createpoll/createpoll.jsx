@@ -3,8 +3,22 @@ import React, { Component } from 'react';
 import PollForm from './pollform';
 
 class CreatePoll extends Component {
+  static contextTypes = { router: React.PropTypes.object };
+
   constructor(props) {
     super(props);
+  }
+
+  componentDidUpdate() {
+    const {
+      context: { router },
+      props: { createPoll, actions: { resetCreatePoll }, dispatch }
+    } = this;
+
+    if (createPoll.poll !== null) {
+      router.push(`polls/details/${createPoll.poll._id}`);
+      dispatch(resetCreatePoll());
+    }
   }
 
   _handleSavePoll = (data) => {

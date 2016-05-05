@@ -2,7 +2,8 @@ import * as ActionTypes from '../constants';
 
 const initialState = {
   isFetching: false,
-  error: null
+  error: null,
+  poll: null
 };
 
 const createPoll = (state = initialState, action) => {
@@ -12,11 +13,16 @@ const createPoll = (state = initialState, action) => {
     }
 
     case ActionTypes.CREATE_POLL_SUCCESS: {
-      return Object.assign({}, state, { isFetching: false });
+      const updatedPoll = Object.assign({}, action.payload.poll);
+      return Object.assign({}, state, { isFetching: false, poll: updatedPoll });
     }
 
     case ActionTypes.CREATE_POLL_FAILURE: {
       return Object.assign({}, state, { isFetching: false });
+    }
+
+    case ActionTypes.RESET_CREATE_POLL: {
+      return initialState;
     }
 
     default:
