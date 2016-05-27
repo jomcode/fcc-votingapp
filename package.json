@@ -28,7 +28,7 @@
     "dev": {
       "command": "concurrently -k \"npm run dev:server\" \"npm run dev:client\"",
       "env": {
-        "NODE_ENV": "developemnt"
+        "NODE_ENV": "development"
       }
     },
     "build:client": {
